@@ -1,45 +1,23 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>คำนวณน้ำหนักเหล็ก</title>
-    <style>
-        body { font-family: sans-serif; padding: 20px; background: #f4f4f4; display: flex; justify-content: center; }
-        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 100%; max-width: 300px; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 18px; }
-        .result { font-size: 24px; font-weight: bold; color: #007bff; text-align: center; margin-top: 15px; background: #e7f3ff; padding: 10px; border-radius: 5px; }
-    </style>
-</head>
-<body>
-
-<div class="card">
-    <h3>คำนวณน้ำหนักเหล็ก</h3>
-    <label>กว้าง</label>
-    <input type="number" id="w" placeholder="0" oninput="cal()">
-    <label>ยาว</label>
-    <input type="number" id="l" placeholder="0" oninput="cal()">
-    <label>หนา</label>
-    <input type="number" id="t" placeholder="0" oninput="cal()">
+<div class="container">
+    <h2>คำนวณน้ำหนักเหล็ก</h2>
     
-    <div style="margin-top:10px;">น้ำหนักรวม:</div>
-    <div class="result" id="total">0.00 กก.</div>
+    <div class="input-group">
+        <label>กว้าง (mm)</label>
+        <input type="number" id="width" placeholder="0" oninput="calculate()">
+    </div>
+    
+    <div class="input-group">
+        <label>ยาว (mm)</label>
+        <input type="number" id="length" placeholder="0" oninput="calculate()">
+    </div>
+    
+    <div class="input-group">
+        <label>หนา (mm)</label>
+        <input type="number" id="thickness" placeholder="0" oninput="calculate()">
+    </div>
+
+    <div class="result-box">
+        <div>น้ำหนักรวม:</div>
+        <div class="result-val" id="totalWeight">0.00 <span class="unit">กก.</span></div>
+    </div>
 </div>
-
-<script>
-    function cal() {
-        // ดึงค่าจากช่องกรอก
-        const w = parseFloat(document.getElementById('w').value) || 0;
-        const l = parseFloat(document.getElementById('l').value) || 0;
-        const t = parseFloat(document.getElementById('t').value) || 0;
-        
-        // ใช้สูตรที่คุณต้องการ: กว้าง x ยาว x หนา x 0.0079
-        const res = w * l * t * 0.0079;
-        
-        // แสดงผลทศนิยม 2 ตำแหน่ง
-        document.getElementById('total').innerText = res.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " กก.";
-    }
-</script>
-
-</body>
-</html>
