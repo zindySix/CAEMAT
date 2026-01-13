@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>เครื่องคำนวณเหล็ก (mm)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { 
+            font-family: 'Kanit', sans-serif; 
+            background-color: #f4f7f9; 
+            display: flex; justify-content: center; align-items: center; 
+            min-height: 100vh; margin: 0; padding: 20px;
+        }
+        .container { 
+            background: white; 
+            padding: 25px; border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            width: 100%; max-width: 400px; 
+        }
+        h2 { text-align: center; color: #2c3e50; margin-bottom: 25px; font-size: 1.5rem; }
+        .input-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 6px; color: #555; font-size: 0.95rem; font-weight: 400; }
+        
+        /* ปรับแต่งช่องกรอกให้กดง่ายในมือถือ */
+        input { 
+            width: 100%; 
+            padding: 14px; 
+            border: 2px solid #edf2f7; 
+            border-radius: 12px; 
+            font-size: 1.1rem; 
+            outline: none; 
+            transition: all 0.2s;
+            background: #f8fafc;
+        }
+        input:focus { border-color: #4a90e2; background: white; box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1); }
+
+        .result-box { 
+            background: #4a90e2; 
+            padding: 20px; border-radius: 16px; 
+            text-align: center; margin-top: 25px; 
+            color: white;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+        .result-label { font-size: 0.9rem; opacity: 0.9; margin-bottom: 5px; }
+        .result-val { font-size: 2.2rem; font-weight: 600; }
+        .unit { font-size: 1.2rem; font-weight: 300; margin-left: 5px; }
+
+        /* ปุ่ม Reset */
+        .btn-reset {
+            width: 100%; background: none; border: none; 
+            color: #a0aec0; margin-top: 15px; cursor: pointer;
+            font-size: 0.9rem; text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>คำนวณน้ำหนัก (mm)</h2>
+    
+    <div class="input-group">
+        <label>กว้าง (mm)</label>
+        <input type="number" id="w" inputmode="decimal" placeholder="0" oninput="doCalc()">
+    </div>
+    
+    <div class="input-group">
+        <label>ยาว (mm)</label>
+        <input type="number" id="l" inputmode="decimal" placeholder="0" oninput="doCalc()">
+    </div>
+    
+    <div class="input-group">
+        <label>หนา (mm)</label>
+        <input type="number" id="t" inputmode="decimal" placeholder="0" oninput="doCalc()">
+    </div>
+
+    <div class="result-box">
+        <div class="result-label">น้ำหนักเหล็กสุทธิ</div>
+        <div class="result-val" id="res">0.00 <span class="unit">กก.</span></div>
+    </div>
+
+    <button class="btn-reset" onclick="resetAll()">ล้างข้อมูลทั้งหมด</button>
+</div>
+
+<script>
+    function doCalc() {
+        // ดึงค่าด้วย ID ที่สั้นและตรงกัน
+        const width = parseFloat(document.getElementById('w').value) || 0;
+        const length = parseFloat(document.getElementById('l').value) || 0;
+        const thick = parseFloat(document.getElementById('t').value) || 0;
+        
+        // สูตรคำนวณ (ปรับจุดทศนิยมให้รองรับหน่วย mm)
+        // กว้าง(mm) x ยาว(mm) x หนา(mm) x 0.00000785 = กิโลกรัม
+        const finalWeight = width * length * thick * 0.00000785;
+
+        // แสดงผลลัพธ์
+        document.getElementById('res').innerHTML = 
+            finalWeight.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) 
+            + ' <span class="unit">กก.</span>';
+    }
+
+    function resetAll() {
+        document.getElementById('w').value = '';
+        document.getElementById('l').value = '';
+        document.getElementById('t').value = '';
+        document.getElementById('res').innerHTML = '0.00 <span class="unit">กก.</span>';
+    }
+</script>
+
+</body>
+</html>
