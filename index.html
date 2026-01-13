@@ -1,0 +1,23 @@
+<div class="container">
+    <h2>คำนวณน้ำหนักเหล็ก</h2>
+    
+    <div class="input-group">
+        <label>กว้าง (mm)</label>
+        <input type="number" id="width" placeholder="0" oninput="calculate()">
+    </div>
+    
+    <div class="input-group">
+        <label>ยาว (mm)</label>
+        <input type="number" id="length" placeholder="0" oninput="calculate()">
+    </div>
+    
+    <div class="input-group">
+        <label>หนา (mm)</label>
+        <input type="number" id="thickness" placeholder="0" oninput="calculate()">
+    </div>
+
+    <div class="result-box">
+        <div>น้ำหนักรวม:</div>
+        <div class="result-val" id="totalWeight">0.00 <span class="unit">กก.</span></div>
+    </div>
+</div>
